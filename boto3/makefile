@@ -1,3 +1,10 @@
+# ====================
+# Datos estaticos
+# ====================
+
+DEV_AWS_REGION = us-east-2
+LAYER_NAME = boto3
+
 install-package:
 	mkdir package
 	pip install boto3==1.34.120 -t package
@@ -17,3 +24,8 @@ zip-package:
 clean-package:
 	rm -rf package
 	rm -f function.zip
+
+deploy-layer:
+	aws lambda publish-layer-version --layer-name $(LAYER_NAME) --zip-file fileb://function.zip --compatible-runtimes python3.11 --region $(DEV_AWS_REGION)
+
+update: install-package zip-package deploy-layer clean-package
