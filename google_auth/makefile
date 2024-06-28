@@ -7,7 +7,12 @@ LAYER_NAME = google_auth
 
 install-package:
 	mkdir package
-	pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib -t package
+	pip install google-api-core==2.18.0 -t package
+	pip install google-api-python-client==2.125.0 -t package
+	pip install google-auth==2.29.0 -t package
+	pip install google-auth-httplib2==0.2.0 -t package
+	pip install google-auth-oauthlib==1.2.0 -t package
+	pip install googleapis-common-protos==1.63.0 -t package
 
 zip-package:
 	cd package && zip -r ../function.zip .
